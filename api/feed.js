@@ -47,14 +47,22 @@ function parseVideos(xml) {
       channel: tag(block, 'name') || 'YouTube',
       published: tag(block, 'published')
     };
-  }).filter(item => item.id && item.title);
+  }).filter(item => item.id && item.title && /grand theft auto vi|vice city|gta vi/i.test(item.title));
 }
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 's-maxage=240, stale-while-revalidate=60');
   const newsUrl = 'https://news.google.com/rss/search?q=GTA%206&hl=pt-BR&gl=BR&ceid=BR:pt-419';
-  const videoUrl = 'https://www.youtube.com/feeds/videos.xml?search_query=GTA+6';
+  const videoUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=UC6VcWc1rAoWdBCM0JxrRQ3A';
   const [newsResult, videoResult] = await Promise.allSettled([fetchText(newsUrl), fetchText(videoUrl)]);
   const news = newsResult.status === 'fulfilled' ? parseNews(newsResult.value) : [];
-  const videos = videoResult.status === 'fulfilled' ? parseVideos(videoResult.value) : [];
+  const fallbackVideos = [
+    { id: 'T95WGWkx7P0', title: 'Grand Theft Auto VI Now Available', channel: 'Rockstar Games', published: '2026-11-19T13:59:56+00:00' },
+    { id: 'rz1B4B2yBZY', title: 'Grand Theft Auto VI Launch Trailer', channel: 'Rockstar Games', published: '2026-10-15T13:00:26+00:00' },
+    { id: 'tJbzMqJGH4k', title: 'Grand Theft Auto VI: An Extended Look', channel: 'Rockstar Games', published: '2026-08-27T21:00:48+00:00' },
+    { id: 'VQRLujxTm3c', title: 'Grand Theft Auto VI Trailer 2', channel: 'Rockstar Games', published: '2025-05-06T00:00:00+00:00' },
+    { id: 'QdBZY2fkU-0', title: 'Grand Theft Auto VI Trailer 1', channel: 'Rockstar Games', published: '2023-12-04T00:00:00+00:00' }
+  ];
+  const liveVideos = videoResult.status === 'fulfilled' ? parseVideos(videoResult.value) : [];
+  const videos = liveVideos.length ? liveVideos : fallbackVideos;
   res.status(200).json({ updatedAt: new Date().toISOString(), news, videos, sources: ['Google News RSS', 'YouTube RSS'] });
 };
