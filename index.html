@@ -31,6 +31,36 @@
     .refresh-status{font-size:9px;color:#777288}.empty-state{padding:25px;border:1px dashed rgba(255,255,255,.17);border-radius:14px;color:#a9a3b7;font-size:11px;text-align:center;grid-column:1/-1}
     @media(max-width:900px){.navlinks{gap:14px}.news-grid{grid-template-columns:1fr 1fr}.news-card:first-child{grid-column:span 2}.video-layout{grid-template-columns:1fr}.video-list{display:grid;grid-template-columns:1fr 1fr}.radar-grid{grid-template-columns:1fr 1fr}.hero{min-height:500px}.hero-content{padding-left:5%}.skyline{width:80%;opacity:.5}}
     @media(max-width:650px){.wrap{width:calc(100% - 28px)}.nav{height:66px}.navlinks{display:none;position:absolute;top:66px;left:0;right:0;padding:17px 22px 20px;background:rgba(8,8,18,.98);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}.navlinks.open{display:flex}.menu-btn{display:block}.live-pill{display:none}.hero{margin-top:14px;min-height:540px}.hero-content{padding:61px 22px 36px}.hero h1{font-size:66px}.hero-copy{font-size:13px}.hero-stats{gap:18px}.stat strong{font-size:20px}.skyline{width:112%;height:72%;right:-22%;opacity:.38}.section-head{align-items:flex-start;flex-direction:column}.news-grid{grid-template-columns:1fr}.news-card:first-child{grid-column:auto}.news-visual,.news-card:first-child .news-visual{height:125px}.feature-band{grid-template-columns:1fr}.video-list{grid-template-columns:1fr}.radar-grid{grid-template-columns:1fr}.footer-top,.footer-bottom{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}.volume{width:65px}.music-state{display:none}section{padding-top:53px}}
+    /* Player contínuo e lista lateral */
+    .video-layout{grid-template-columns:minmax(0,1.65fr) minmax(285px,.8fr);align-items:start;gap:16px}
+    .video-player{display:block;overflow:hidden;isolation:isolate}
+    #ytPlayerHost{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+    #ytPlayerHost iframe{width:100%!important;height:100%!important}
+    .video-placeholder{z-index:2;gap:18px;background:radial-gradient(ellipse at 50% 42%,rgba(255,74,184,.15),transparent 45%),linear-gradient(135deg,rgba(17,13,31,.96),rgba(8,27,36,.96));}
+    .video-placeholder.hidden{display:none}
+    .video-placeholder b{font-size:clamp(28px,4vw,45px);color:#fff;text-shadow:0 0 24px rgba(255,74,184,.3)}
+    .video-placeholder .btn{margin-top:6px}
+    .video-sidebar{border:1px solid var(--line);border-radius:17px;background:linear-gradient(150deg,rgba(20,20,37,.98),rgba(11,12,23,.98));overflow:hidden;min-width:0}
+    .video-sidebar-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 14px 12px;border-bottom:1px solid var(--line)}
+    .video-sidebar-head strong{display:block;font:800 19px 'Barlow Condensed';letter-spacing:.7px}
+    .video-sidebar-head span:not(.autoplay-chip){display:block;font-size:9px;color:var(--muted);margin-top:4px}
+    .autoplay-chip{flex-shrink:0;border:1px solid rgba(72,231,241,.25);background:rgba(72,231,241,.07);border-radius:99px;padding:6px 8px;color:var(--cyan);font-size:8px;font-weight:900;letter-spacing:.7px}
+    .video-filters{display:flex;gap:6px;padding:11px 12px 4px}
+    .video-filter{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#a9a5b8;border-radius:99px;padding:7px 11px;font-size:9px;font-weight:800;cursor:pointer}
+    .video-filter.active{border-color:rgba(255,74,184,.45);background:rgba(255,74,184,.12);color:#ffd7ef}
+    .video-list{display:flex;flex-direction:column;gap:8px;max-height:500px;overflow:auto;padding:10px}
+    .video-row{display:flex;align-items:center;gap:10px;width:100%;padding:8px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.025);cursor:pointer;text-align:left;color:#fff;transition:border-color .18s,background .18s}
+    .video-row:hover,.video-row.active{border-color:rgba(72,231,241,.48);background:rgba(72,231,241,.07)}
+    .video-thumb{position:relative;width:112px;aspect-ratio:16/9;border-radius:7px;background:linear-gradient(135deg,#40213f,#16505a);display:block;overflow:hidden;flex-shrink:0}
+    .video-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .video-type{position:absolute;left:5px;bottom:5px;border-radius:4px;padding:3px 5px;background:rgba(8,8,18,.88);font-size:8px;font-weight:900;letter-spacing:.6px;color:#fff}
+    .video-type.live{background:#e83c62;color:#fff}
+    .video-copy{display:block;min-width:0;flex:1}
+    .video-copy strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:10px;line-height:1.35}
+    .video-copy small{display:block;color:#9994a8;font-size:8px;line-height:1.45;margin-top:5px}
+    .video-radar-status{margin-top:10px;color:#8e899f;font-size:9px;line-height:1.5}
+    @media(max-width:900px){.video-layout{grid-template-columns:1fr}.video-list{max-height:390px}}
+    @media(max-width:650px){.video-layout{gap:12px}.video-player{min-height:210px}.video-sidebar-head{padding:13px 11px}.autoplay-chip{font-size:7px}.video-thumb{width:102px}.video-list{max-height:360px}}
   </style>
 </head>
 <body>
@@ -76,9 +106,27 @@
     <section id="videos">
       <div class="section-head"><div><div class="kicker">Da comunidade para a comunidade</div><h2 class="section-title">Vídeos <span>no radar</span></h2><p class="section-desc">Destaques recentes do canal oficial da Rockstar Games. Escolha um vídeo para assistir no player integrado ou abra o canal no YouTube.</p></div><a class="text-link" href="https://www.youtube.com/@RockstarGames" target="_blank" rel="noopener">Canal da Rockstar ↗</a></div>
       <div class="video-layout">
-        <div class="video-main"><div class="video-player"><div class="video-placeholder"><div><b>GTA VI VIDEO RADAR</b><span>SELECIONE UM VÍDEO AO LADO PARA ASSISTIR</span></div></div><button class="play-big" id="openYoutubeSearch" aria-label="Buscar vídeos no YouTube">▶</button></div><div class="video-info"><h3 id="videoMainTitle">Destaques oficiais de GTA VI</h3><p id="videoMainSub">Selecione um vídeo da Rockstar Games para assistir no player integrado.</p></div></div>
-        <div class="video-list" id="videoList"><div class="empty-state">Buscando vídeos recentes…</div></div>
+        <div class="video-main">
+          <div class="video-player">
+            <div id="ytPlayerHost"></div>
+            <div class="video-placeholder" id="videoPlaceholder">
+              <div><b>VICE CITY VIDEO PLAYER</b><span>ESCOLHA UM VÍDEO NA LISTA AO LADO</span></div>
+              <button class="btn btn-primary" id="startFirstVideo" type="button">▶ Assistir primeiro vídeo</button>
+            </div>
+          </div>
+          <div class="video-info"><h3 id="videoMainTitle">O radar está procurando vídeos e transmissões</h3><p id="videoMainSub">Selecione um item na lista para iniciar. Ao terminar, o próximo vídeo será carregado automaticamente.</p></div>
+        </div>
+        <aside class="video-sidebar">
+          <div class="video-sidebar-head"><div><strong>RADAR DE VÍDEOS</strong><span id="videoCount">Buscando conteúdo…</span></div><span class="autoplay-chip">⏭ PRÓXIMO AUTOMÁTICO</span></div>
+          <div class="video-filters" id="videoFilters">
+            <button class="video-filter active" type="button" data-filter="all">Todos</button>
+            <button class="video-filter" type="button" data-filter="live">● Ao vivo</button>
+            <button class="video-filter" type="button" data-filter="video">Vídeos</button>
+          </div>
+          <div class="video-list" id="videoList"><div class="empty-state">Buscando vídeos recentes…</div></div>
+        </aside>
       </div>
+      <div class="video-radar-status" id="videoApiStatus">A lista de transmissões ao vivo será ativada após configurar a API do YouTube.</div>
     </section>
 
     <section id="radar">
@@ -106,13 +154,130 @@
     const $ = (s) => document.querySelector(s);
     const escapeHtml = (s='') => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const formatDate = (value) => { if(!value) return 'Recente'; const d=new Date(value); return Number.isNaN(d.getTime())?'Recente':d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}); };
-    function openVideo(id,title){ if(!id)return; $('#modalTitle').textContent=title||'Assistindo no GTA6 Radar'; $('#modalFrame').src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?autoplay=1&rel=0'; $('#videoModal').classList.add('open'); document.body.style.overflow='hidden'; }
-    function closeVideo(){ $('#modalFrame').src='about:blank'; $('#videoModal').classList.remove('open'); document.body.style.overflow=''; }
-    $('#modalClose').addEventListener('click',closeVideo); $('#videoModal').addEventListener('click',e=>{if(e.target===$('#videoModal'))closeVideo()}); document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVideo()});
-    function renderNews(items){ const grid=$('#newsGrid'); if(!items?.length){grid.innerHTML='<div class="empty-state">Não foi possível carregar o feed agora. Use “Ver todas as notícias” para abrir a busca atualizada.</div>';return;} grid.innerHTML=items.slice(0,6).map((n,i)=>`<a class="news-card" href="${escapeHtml(n.link||'#')}" target="_blank" rel="noopener"><div class="news-visual"><b>${i===0?'BREAKING':'GTA VI'}</b></div><div class="news-body"><div class="tag">${escapeHtml(n.source||'Notícias GTA VI')}</div><h3>${escapeHtml(n.title||'Notícia sobre GTA VI')}</h3><div class="news-meta"><span>${escapeHtml(formatDate(n.published))}</span><span>LER MATÉRIA ↗</span></div></div></a>`).join(''); }
-    function renderVideos(items){ const list=$('#videoList'); if(!items?.length){list.innerHTML='<div class="empty-state">Sem vídeos carregados neste momento. <a class="text-link" href="https://www.youtube.com/results?search_query=GTA+6" target="_blank" rel="noopener">Buscar no YouTube ↗</a></div>';return;} list.innerHTML=items.slice(0,6).map(v=>`<button class="video-row" data-id="${escapeHtml(v.id)}" data-title="${escapeHtml(v.title)}"><span class="video-thumb">▶</span><span><strong>${escapeHtml(v.title)}</strong><small>${escapeHtml(v.channel||'YouTube')} · ${escapeHtml(formatDate(v.published))}</small></span></button>`).join(''); list.querySelectorAll('.video-row').forEach(b=>b.addEventListener('click',()=>{ $('#videoMainTitle').textContent=b.dataset.title; $('#videoMainSub').textContent='Reproduzindo vídeo do YouTube dentro do GTA6 Radar.'; openVideo(b.dataset.id,b.dataset.title); })); }
-    async function refreshFeed(){ const status=$('#refreshStatus'); status.textContent='Atualizando radar…'; try{const response=await fetch('/api/feed',{cache:'no-store'});if(!response.ok)throw new Error('Feed indisponível');const data=await response.json();renderNews(data.news||[]);renderVideos(data.videos||[]);const now=new Date();status.textContent='Atualizado às '+now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}catch(err){status.textContent='Feed temporariamente indisponível';renderNews([]);renderVideos([]);} }
-    $('#openYoutubeSearch').addEventListener('click',()=>window.open('https://www.youtube.com/@RockstarGames','_blank','noopener'));
+    let allVideoItems = [];
+    let playQueue = [];
+    let currentVideoId = null;
+    let youtubePlayer = null;
+    let youtubePlayerReady = false;
+    let pendingVideoId = null;
+    let videoFilter = 'all';
+    const formatViews = value => value ? new Intl.NumberFormat('pt-BR').format(Number(value)) : '';
+    function createYouTubePlayer(){
+      if(youtubePlayer || !window.YT || !window.YT.Player) return;
+      youtubePlayer = new YT.Player('ytPlayerHost',{
+        width:'100%',height:'100%',
+        playerVars:{autoplay:0,controls:1,rel:0,playsinline:1,enablejsapi:1,origin:window.location.origin,hl:'pt-BR'},
+        events:{
+          onReady:()=>{youtubePlayerReady=true;if(pendingVideoId){const id=pendingVideoId;pendingVideoId=null;playVideoById(id);}},
+          onStateChange:event=>{
+            if(event.data===YT.PlayerState.ENDED) playNextVideo();
+          },
+          onError:event=>{
+            const item=allVideoItems.find(v=>v.id===currentVideoId);
+            if(item){$('#videoMainSub').textContent='Este vídeo não pode ser reproduzido incorporado. Pulando para o próximo…';}
+            if([2,5,100,101,150].includes(event.data)) playNextVideo();
+          },
+          onAutoplayBlocked:()=>{$('#videoMainSub').textContent='O navegador bloqueou o início automático. Use o botão de reprodução no próprio player.';}
+        }
+      });
+    }
+    function ensureYouTubePlayer(){
+      if(window.YT && window.YT.Player){createYouTubePlayer();return;}
+      if(window.__gtaYouTubeApiLoading)return;
+      window.__gtaYouTubeApiLoading=true;
+      window.onYouTubeIframeAPIReady=createYouTubePlayer;
+      const script=document.createElement('script');
+      script.src='https://www.youtube.com/iframe_api';
+      script.async=true;
+      document.head.appendChild(script);
+    }
+    function updateActiveVideo(){
+      document.querySelectorAll('.video-row').forEach(row=>row.classList.toggle('active',row.dataset.id===currentVideoId));
+    }
+    function playVideoById(id){
+      if(!youtubePlayerReady || !youtubePlayer){pendingVideoId=id;ensureYouTubePlayer();$('#videoMainSub').textContent='Preparando o player do YouTube…';return;}
+      const item=allVideoItems.find(v=>v.id===id);
+      if(!item)return;
+      if(item.embeddable===false){
+        $('#videoMainSub').textContent='Este vídeo não permite reprodução incorporada. Abrindo no YouTube.';
+        window.open(item.url||('https://www.youtube.com/watch?v='+encodeURIComponent(id)),'_blank','noopener');
+        playNextVideo();
+        return;
+      }
+      currentVideoId=id;
+      $('#videoPlaceholder').classList.add('hidden');
+      $('#videoMainTitle').textContent=item.title;
+      const info=item.type==='live'
+        ? 'AO VIVO agora'+(item.viewerCount?' · '+formatViews(item.viewerCount)+' pessoas assistindo':'')+' · '+(item.channel||'YouTube')
+        : (item.channel||'YouTube')+' · '+formatDate(item.published)+(item.viewCount?' · '+formatViews(item.viewCount)+' visualizações':'');
+      $('#videoMainSub').textContent=info+' · Próximo vídeo automático ativado';
+      updateActiveVideo();
+      youtubePlayer.loadVideoById({videoId:id});
+    }
+    function playNextVideo(){
+      if(!playQueue.length)return;
+      const currentIndex=playQueue.findIndex(item=>item.id===currentVideoId);
+      const next=playQueue[currentIndex+1];
+      if(next){playVideoById(next.id);}
+      else{$('#videoMainSub').textContent='Fim da fila. Escolha outro vídeo na lista para continuar.';}
+    }
+    function renderVideos(lives=[],videos=[],configured=false,apiMessage=''){
+      const dedupe=new Map();
+      [...lives,...videos].forEach(item=>{if(item?.id && !dedupe.has(item.id))dedupe.set(item.id,item);});
+      allVideoItems=[...dedupe.values()];
+      playQueue=allVideoItems.slice();
+      const liveCount=allVideoItems.filter(v=>v.type==='live').length;
+      $('#videoCount').textContent=allVideoItems.length+' itens · '+liveCount+' ao vivo';
+      $('#videoApiStatus').textContent=configured
+        ? (liveCount?'Encontramos '+liveCount+' transmissão(ões) ao vivo.':'Nenhuma live encontrada agora. A consulta é renovada automaticamente a cada 20 minutos.')
+        : 'Vídeos oficiais disponíveis. Para buscar lives e vídeos recentes da comunidade, adicione YOUTUBE_API_KEY nas variáveis de ambiente da Vercel.';
+      if(apiMessage && configured) $('#videoApiStatus').textContent=apiMessage;
+      renderVideoList();
+      $('#startFirstVideo').disabled=!allVideoItems.length;
+    }
+    function renderVideoList(){
+      const list=$('#videoList');
+      const items=allVideoItems.filter(v=>videoFilter==='all'||(videoFilter==='live'?v.type==='live':v.type!=='live'));
+      if(!items.length){
+        list.innerHTML='<div class="empty-state">'+(videoFilter==='live'?'Nenhuma transmissão ao vivo encontrada no momento.':'Nenhum vídeo disponível nesta categoria.')+'</div>';
+        return;
+      }
+      list.innerHTML=items.map(v=>{
+        const thumbnail=v.thumbnail||('https://i.ytimg.com/vi/'+encodeURIComponent(v.id)+'/hqdefault.jpg');
+        const badge=v.type==='live'?'<span class="video-type live">● AO VIVO</span>':'<span class="video-type">VÍDEO</span>';
+        const meta=v.type==='live'
+          ? (v.viewerCount?formatViews(v.viewerCount)+' assistindo':'Transmissão ativa')+' · '+escapeHtml(v.channel||'YouTube')
+          : escapeHtml(v.channel||'YouTube')+' · '+escapeHtml(formatDate(v.published));
+        return '<button class="video-row'+(v.id===currentVideoId?' active':'')+'" type="button" data-id="'+escapeHtml(v.id)+'"><span class="video-thumb"><img loading="lazy" src="'+escapeHtml(thumbnail)+'" alt=""><span class="video-type '+(v.type==='live'?'live':'')+'">'+(v.type==='live'?'● AO VIVO':'VÍDEO')+'</span></span><span class="video-copy"><strong>'+escapeHtml(v.title)+'</strong><small>'+meta+'</small></span></button>';
+      }).join('');
+      list.querySelectorAll('.video-row').forEach(row=>row.addEventListener('click',()=>playVideoById(row.dataset.id)));
+    }
+    document.querySelectorAll('.video-filter').forEach(button=>button.addEventListener('click',()=>{
+      videoFilter=button.dataset.filter;
+      document.querySelectorAll('.video-filter').forEach(item=>item.classList.toggle('active',item===button));
+      renderVideoList();
+    }));
+    $('#startFirstVideo').addEventListener('click',()=>{if(allVideoItems[0])playVideoById(allVideoItems[0].id);});
+    function renderNews(items){ const grid=$('#newsGrid'); if(!items?.length){grid.innerHTML='<div class="empty-state">Não foi possível carregar o feed agora. Use “Ver todas as notícias” para abrir a busca atualizada.</div>';return;} grid.innerHTML=items.slice(0,6).map((n,i)=>'<a class="news-card" href="'+escapeHtml(n.link||'#')+'" target="_blank" rel="noopener"><div class="news-visual"><b>'+(i===0?'BREAKING':'GTA VI')+'</b></div><div class="news-body"><div class="tag">'+escapeHtml(n.source||'Notícias GTA VI')+'</div><h3>'+escapeHtml(n.title||'Notícia sobre GTA VI')+'</h3><div class="news-meta"><span>'+escapeHtml(formatDate(n.published))+'</span><span>LER MATÉRIA ↗</span></div></div></a>').join(''); }
+    async function fetchJson(path){
+      try{const response=await fetch(path);if(!response.ok)throw new Error('HTTP '+response.status);return await response.json();}
+      catch(error){return null;}
+    }
+    async function refreshFeed(){
+      const status=$('#refreshStatus');status.textContent='Atualizando radar…';
+      const [feed,liveData,videoData]=await Promise.all([
+        fetchJson('/api/feed'),fetchJson('/api/youtube-live'),fetchJson('/api/youtube-videos')
+      ]);
+      if(feed)renderNews(feed.news||[]);else renderNews([]);
+      const lives=(liveData?.lives||[]).map(v=>({...v,type:'live'}));
+      const recentVideos=(videoData?.videos?.length?videoData.videos:(feed?.videos||[])).map(v=>({...v,type:'video'}));
+      const configured=Boolean(liveData?.configured&&videoData?.configured);
+      const message=liveData?.message||videoData?.message||'';
+      renderVideos(lives,recentVideos,configured,message);
+      const now=new Date();status.textContent='Atualizado às '+now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    }
+    ensureYouTubePlayer();
+    refreshFeed();setInterval(refreshFeed,5*60*1000);
     $('#menuBtn').addEventListener('click',()=>$('#navlinks').classList.toggle('open')); $('#navlinks').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>$('#navlinks').classList.remove('open')));
     const audio=$('#introMusic'); const musicBtn=$('#musicToggle'); const volume=$('#volume'); const musicState=$('#musicState'); const musicText=$('#musicText'); audio.volume=.12;
     async function loadMusic(){if(audio.src)return;musicText.textContent='Carregando trilha…';const paths=Array.from({length:58},(_,i)=>'/assets/audio/part-'+String(i+1).padStart(3,'0')+'.txt');const parts=await Promise.all(paths.map(async path=>{const r=await fetch(path,{cache:'force-cache'});if(!r.ok)throw new Error('Parte de áudio não encontrada: '+path);return r.text();}));const encoded=parts.join('');const raw=atob(encoded);const bytes=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);const url=URL.createObjectURL(new Blob([bytes],{type:'audio/ogg'}));audio.src=url;audio.load();}
