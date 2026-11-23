@@ -89,7 +89,7 @@ module.exports = async function handler(req, res) {
     const enriched = await enrichItems(videos, apiKey);
     return res.status(200).json({
       configured: true,
-      videos: enriched,
+      videos: enriched.filter(item => item.embeddable !== false),
       updatedAt: new Date().toISOString(),
       message: null
     });

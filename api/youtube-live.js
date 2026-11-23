@@ -89,7 +89,7 @@ module.exports = async function handler(req, res) {
     const enriched = await enrichItems(lives, apiKey);
     return res.status(200).json({
       configured: true,
-      lives: enriched,
+      lives: enriched.filter(item => item.embeddable !== false),
       updatedAt: new Date().toISOString(),
       message: enriched.length ? null : 'Nenhuma transmissão ao vivo sobre GTA VI foi encontrada nesta consulta.'
     });

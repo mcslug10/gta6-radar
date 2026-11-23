@@ -199,6 +199,8 @@
       const item=allVideoItems.find(v=>v.id===id);
       if(!item)return;
       if(item.embeddable===false){
+        currentVideoId=id;updateActiveVideo();
+        $('#videoMainTitle').textContent=item.title;
         $('#videoMainSub').textContent='Este vídeo não permite reprodução incorporada. Abrindo no YouTube.';
         window.open(item.url||('https://www.youtube.com/watch?v='+encodeURIComponent(id)),'_blank','noopener');
         playNextVideo();
